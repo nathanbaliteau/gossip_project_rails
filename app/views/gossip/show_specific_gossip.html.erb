@@ -1,0 +1,9 @@
+<p> 
+	<%= @specific_gossip.user.first_name %>
+    <%= @specific_gossip.user.last_name %>, 
+    <%= @specific_gossip.user.age %> ans.
+    <a href="/user/<%= @specific_gossip.user_id %>"> (voir le profil) </a>
+</p> <br/>
+<p> <%= @specific_gossip.title %> </p> <br/>
+<p>	"<%= @specific_gossip.content %>"" </p>
+<p> Created on : <%= @specific_gossip.created_at.strftime('%d/%m/%Y') %> </p>
