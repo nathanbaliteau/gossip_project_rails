@@ -15,9 +15,10 @@ JoinTableTagGossip.destroy_all
 PrivateMessage.destroy_all
 
 10.times do
-  city = City.create!(name: Faker::Address.city, zip_code: Faker::Address.zip_code)
+  city = City.create!(name: Faker::Address.city, zip_code: Faker::Number.number(digits: 5))
 end
 
+user = User.create!(first_name: 'anonymous', last_name: 'anonymous', description: Faker::Quote.yoda, email: Faker::Internet.email, age: Faker::Number.number(digits: 2), city: City.all.sample)
 10.times do
   user = User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Quote.yoda, email: Faker::Internet.email, age: Faker::Number.number(digits: 2), city: City.all.sample)
 end
