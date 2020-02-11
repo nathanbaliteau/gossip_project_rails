@@ -1,0 +1,8 @@
+<h1>Bienvenue sur ce super site de potins où toutes les fouines trouveront leur bonheur !</h1>
+    <h2>Voici la liste des potins :</h2>
+    <% @gossips.each do |gossip| %>
+      <p> 
+      	<%= gossip.user.first_name %> <%= gossip.title %>    
+      	<%= link_to 'voir le potin', gossip_path(gossip.id) %> <br/>
+    	</p> 
+    <% end %>

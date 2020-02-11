@@ -1,8 +1,8 @@
 <p> 
 	<%= @specific_gossip.user.first_name %>
-    <%= @specific_gossip.user.last_name %>, 
-    <%= @specific_gossip.user.age %> ans.
-    <a href="/user/<%= @specific_gossip.user_id %>"> (voir le profil) </a>
+  <%= @specific_gossip.user.last_name %>, 
+  <%= @specific_gossip.user.age %> ans.
+  <%= link_to '(voir le profil)', user_path(@specific_gossip.user.id) %>
 </p> <br/>
 <p> <%= @specific_gossip.title %> </p> <br/>
 <p>	"<%= @specific_gossip.content %>"" </p>
