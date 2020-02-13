@@ -1,0 +1,31 @@
+<br/>
+
+<div class="starter-template text-center mx-auto">
+  <h3> Tu n'as pas su contenir ta langue de vipère et tu regrettes ? </h3>
+  <h3> Tu t'aperçois que tu as mythoné ? </h3>
+  <br/>
+  <h5> Allez, va modifier ton potin : </h5>
+</div>
+<br/> <br/>
+
+<div class="container"> 
+  <%= form_for @gossip do |f| %>
+    
+    <div class="form-group">
+      <label> Titre du potin : </label>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <label> Contenu du potin : </label>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
+
+    <input type="hidden" name="user" value=<%= User.first.id %>>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary"> Modifier le potin </button>
+    </div>
+
+  <% end %>
+</div>

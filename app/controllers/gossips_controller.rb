@@ -1,14 +1,10 @@
 class GossipsController < ApplicationController
   
   def index
-    puts "$" * 60
-    puts "ceci est le contenu de params :"
-    puts params
-    puts "$" * 60
   end
 
   def show
-    @specific_gossip = Gossip.find(params[:id])
+    @gossip = Gossip.find(params[:id])
   end
 
   def new
@@ -25,16 +21,29 @@ class GossipsController < ApplicationController
     end
   end
 
-  def udpate
-    
+  def edit
+    @gossip = Gossip.find(params[:id])
   end
 
-  def edit
-    
+  def update
+    @gossip = Gossip.find(params[:id])
+    if @gossip.update(gossip_params)
+      redirect_to @gossip
+    else
+      render :edit
+    end
   end
 
   def destroy
-    
+    @gossip = Gossip.find(params[:id])
+    @gossip.destroy
+    redirect_to gossips_path
+  end
+
+  private
+
+  def gossip_params
+    params.require(:gossip).permit(:title, :content)
   end
 
 end

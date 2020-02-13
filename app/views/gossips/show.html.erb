@@ -1,9 +1,25 @@
-<p> 
-	<%= @specific_gossip.user.first_name %>
-  <%= @specific_gossip.user.last_name %>, 
-  <%= @specific_gossip.user.age %> ans.
-  <%= link_to '(voir le profil)', user_path(@specific_gossip.user.id) %>
-</p> <br/>
-<p> <%= @specific_gossip.title %> </p> <br/>
-<p>	"<%= @specific_gossip.content %>"" </p>
-<p> Created on : <%= @specific_gossip.created_at.strftime('%d/%m/%Y') %> </p>
+</br>
+<div class="card m-auto" style="width: 600px;">
+  <div class="card-header">
+    <%= @gossip.title %> 
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p> <%= @gossip.content %> </p>
+      <footer class="blockquote-footer">
+  			<%= link_to @gossip.user.first_name + " " + @gossip.user.last_name, 
+        user_path(@gossip.user.id)%>, 
+        <%= @gossip.user.age %> ans,
+        <%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id) %>,
+      	<cite title="Source Title">
+      		written on : <%= @gossip.created_at.strftime('%d/%m/%Y') %>
+      	</cite>
+      </footer>
+    </blockquote>
+  </div>
+</div>
+<br/>
+<div class="container text-center">
+  <%= link_to 'Editer', edit_gossip_path(params[:id]), class: "btn btn-primary" %>
+  <%= link_to 'Supprimer', gossip_path(params[:id]), class: "btn btn-danger", data: {confirm:"Etes-vous sûr de vouloir supprimer ce potin ?", method:"DELETE"} %>
+</div>

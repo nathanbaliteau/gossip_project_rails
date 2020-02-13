@@ -1,8 +1,14 @@
-<p> 
-	<%= @profile.first_name %>
-  <%= @profile.last_name %>
-</p>
-<p> Age: <%= @profile.age %> ans. </p>
-<p> City: <%= @profile.city.name %> </p>
-<p> Email: <%= @profile.email %> </p>
-<p> Description: <%= @profile.description %> </p>
+<br/>
+<div class="card m-auto" style="width: 20rem">
+	<div class="card-header text-white bg-secondary">
+		<h5 class="my-1"> <%= @user.first_name %> <%= @user.last_name %> </h5>
+	</div>
+  <div class="card-body">
+    <p class="card-text font-italic"> "<%= @user.description %>" </p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Age: <%= @user.age %> ans.</li>
+    <li class="list-group-item">City: <%= link_to @user.city.name, city_path(@user.city.id) %></li>
+    <li class="list-group-item">Email: <%= @user.email %></li>
+  </ul>
+</div>
