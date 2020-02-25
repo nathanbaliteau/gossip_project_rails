@@ -1,10 +1,15 @@
 class GossipsController < ApplicationController
   
+  include GossipsHelper
+  before_action :authenticate_user, only: [:new, :show]
+  before_action :is_admin?, only: [:new, :show]
+
   def index
   end
 
   def show
     @gossip = Gossip.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
@@ -12,7 +17,8 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.find(params[:user]))
+    @gossip = Gossip.new(gossip_params)
+    @gossip.user = current_user
 
     if @gossip.save
       render :index
@@ -43,7 +49,14 @@ class GossipsController < ApplicationController
   private
 
   def gossip_params
-    params.require(:gossip).permit(:title, :content)
+    params.permit(:title, :content)
+  end
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
   end
 
 end

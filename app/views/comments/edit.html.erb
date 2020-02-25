@@ -1,0 +1,29 @@
+<div class="starter-template text-center mx-auto" style="margin-top: 20px">
+  <h3> Tu t'es trop emporté(e) et tu veux faire marche arrière ?</h3>
+  <h3> Tu as trop ricané, bitché et tu regrettes ?</h3>
+  <br/>
+  <h5> Allez, va supprimer ou modifier ton commentaire : </h5>
+</div>
+<br/> <br/>
+
+<div class="container"> 
+	<%= form_tag url_for(action: 'update'), method: "patch" do %>
+    
+    <div class="form-group">
+      <label> Contenu de ton commentaire : </label>
+      <%= text_area_tag :content, @comment.content, class: "form-control" %>
+    </div>
+
+    <input type="hidden" name="user" value=<%= User.first.id %>>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary"> Modifier le potin </button>
+    </div>
+
+  <% end %>
+
+  <div style="margin-top: 10em">
+  	<%= link_to 'Supprimer le commentaire', gossip_comment_path(@gossip.id, @comment.id), class: "btn btn-danger", data: {confirm:"Etes-vous sûr de vouloir supprimer ce potin ?", method:"DELETE"} %>
+  </div>
+
+</div>

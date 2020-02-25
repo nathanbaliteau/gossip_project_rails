@@ -13,6 +13,7 @@ Gossip.destroy_all
 Tag.destroy_all
 JoinTableTagGossip.destroy_all
 PrivateMessage.destroy_all
+Comments.destroy_all
 
 10.times do
   city = City.create!(name: Faker::Address.city, zip_code: Faker::Number.number(digits: 5))
@@ -24,7 +25,11 @@ user = User.create!(first_name: 'anonymous', last_name: 'anonymous', description
 end
 
 20.times do |index|
-  gossip = Gossip.create!(title: "Title #{index}", content: Faker::Quote.most_interesting_man_in_the_world, user: User.all.sample)
+  gossip = Gossip.create!(title: "Title #{index}", content: Faker::Quote.most_interesting_man_in_the_world, user: User.all_except(User.first).sample)
+end
+
+50.times do
+  comment = Comment.create!(content: Faker::ChuckNorris.fact, gossip: Gossip.all.sample, user: User.all_except(User.first).sample)
 end
 
 10.times do 
@@ -36,5 +41,5 @@ Gossip.all.each do |g|
 end
 
 10.times do 
-  private_message = PrivateMessage.create!(content: Faker::Quotes::Shakespeare.hamlet_quote, sender: User.all.sample, recipient: User.all.sample)
+  private_message = PrivateMessage.create!(content: Faker::Quotes::Shakespeare.hamlet_quote, sender: User.all_except(User.first).sample, recipient: User.all_except(User.first).sample)
 end

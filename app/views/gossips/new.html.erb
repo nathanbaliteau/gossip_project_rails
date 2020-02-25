@@ -25,13 +25,11 @@
     <br />
     <div class="form-group">
       <%= label_tag 'Votre potin : ' %>
-      <p> <%= text_area_tag 'content', @gossip.title %> </p>
+      <p> <%= text_area_tag 'content', @gossip.content %> </p>
     </div>
     <br />
 
-    <input type="hidden" name="user" value=<%= User.first.id %>>
-
-    <%= submit_tag "Create Post" %>
+    <%= submit_tag "Créer le potin" %>
 
   <% end %>
 </div>

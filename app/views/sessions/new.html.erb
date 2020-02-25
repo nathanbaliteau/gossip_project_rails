@@ -1,0 +1,21 @@
+<div class="starter-template text-center mx-auto" style="margin-top: 20px">
+  <h3> Connecte-toi : </h3>
+</div>
+
+<div class="container" style="width: 40em; margin-top: 4em">  
+  <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+    <div class="form-group" style="font-style: italic">
+      <label> Email : </label>
+      <%= text_field_tag 'email', @session.email, class: "form-control" %>
+    </div>
+    <div class="form-group" style="font-style: italic">
+      <label> Mot de passe : </label>
+      <%= password_field_tag 'password', @session.password, class: "form-control" %>
+    </div>
+    <div class="form-group text-center" style="margin-top: 3em">
+      <%= submit_tag "Se connecter", class: "btn btn-primary" %>
+    </div>
+
+  <% end %>
+</div>

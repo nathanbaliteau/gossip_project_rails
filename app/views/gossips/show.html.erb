@@ -1,5 +1,4 @@
-</br>
-<div class="card m-auto" style="width: 600px;">
+<div class="card mx-auto" style="margin-top: 20px; width: 600px;">
   <div class="card-header">
     <%= @gossip.title %> 
   </div>
@@ -18,8 +17,28 @@
     </blockquote>
   </div>
 </div>
-<br/>
-<div class="container text-center">
-  <%= link_to 'Editer', edit_gossip_path(params[:id]), class: "btn btn-primary" %>
-  <%= link_to 'Supprimer', gossip_path(params[:id]), class: "btn btn-danger", data: {confirm:"Etes-vous sûr de vouloir supprimer ce potin ?", method:"DELETE"} %>
+
+<% if is_admin? %>
+  <div class="container text-center" style="margin-top: 20px">
+    <%= link_to 'Editer', edit_gossip_path(@gossip.id), class: "btn btn-primary" %>
+    <%= link_to 'Supprimer', gossip_path(@gossip.id), class: "btn btn-danger", data: {confirm:"Etes-vous sûr de vouloir supprimer ce potin ?", method:"DELETE"} %>
+  </div>
+<% end %>
+
+<div class="container text-center" style="margin-top: 50px">
+  <% @gossip.comments.sort_by(&:created_at).each do |comment| %>
+    <div class="row" style="margin-top: 20px">
+      <div class="col well">
+        <%= link_to comment.user.first_name, user_path(comment.user.id)%> a commenté :
+      </div>
+      <div class="col well" style="font-style: italic">
+        "<%= comment.content %>"
+      </div>
+      <div class="col well" style="font-style: italic">
+        <%= link_to 'Editer', edit_gossip_comment_path(@gossip.id, comment.id) %>
+      </div>
+    </div>
+  <% end %>
 </div>
+
+<%= render 'comments/new' %>

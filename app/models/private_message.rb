@@ -1,4 +1,4 @@
-class PrivateMessage < ApplicationRecord
+ class PrivateMessage < ApplicationRecord
   
   validates :content, presence: true
 
